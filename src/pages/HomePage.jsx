@@ -10,7 +10,7 @@ import Footer from "../components/layout/Footer";
 import { usePageStore } from "../stores/usePageStore";
 import ProductCarousel from "../components/product/ProductCarousel";
 import Card from "@mui/material/Card";
-import CardShelfCarousel from "../components/common/CardShelfCarousel.JSX";
+import CardShelfCarousel from "../components/common/CardShelfCarousel.jsx";
 import PageRenderer from "./section/Render";
 
 

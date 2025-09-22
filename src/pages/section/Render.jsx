@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ProductSection from "../../components/product/ProductSection";
-import CardShelfCarousel from "../../components/common/CardShelfCarousel.JSX";
+import CardShelfCarousel from "../../components/common/CardShelfCarousel.jsx";
 
 const sectionMap = {
     product: ProductSection,
