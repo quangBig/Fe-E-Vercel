@@ -1,0 +1,55 @@
+@import "aos/dist/aos.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .animate-fadein {
+    animation: fadein 1s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  .animate-gradient-x {
+    animation: gradient-x 6s ease-in-out infinite alternate;
+  }
+
+  .animate-bounce-slow {
+    animation: bounce 2.5s infinite;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Filter Card Effect for ProductGrid */
+.card-grid:hover>.card:not(:hover) {
+  transform: scale(0.9);
+  filter: brightness(0.5) saturate(0) contrast(1.2) blur(2px);
+  z-index: 1;
+  transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+}
+
+.card-grid>.card:hover {
+  z-index: 10;
+  transform: scale(1.08);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.18);
+  transition: all 0.4s cubic-bezier(.4, 0, .2, 1);
+}
