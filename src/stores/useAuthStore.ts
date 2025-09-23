@@ -44,18 +44,10 @@ export const useAuthStore = create<AuthState, [['zustand/persist', AuthState]]>(
                 set({ loading: true });
                 try {
                     const res = await axios.post("/auth/login", { email, password });
-                    const { access_token } = res.data;
+                    const { access_token, user } = res.data;
 
-                    // Lưu token vào store
-                    set({ token: access_token });
-
-                    // Gọi profile - axios interceptor sẽ tự động thêm token
-                    const profileRes = await axios.get("/auth/profile");
-
-                    set({
-                        user: profileRes.data,
-                        loading: false
-                    });
+                    // Lưu token và user ngay tại đây
+                    set({ token: access_token, user, loading: false });
 
                     toast.success("Đăng nhập thành công");
                 } catch (error: any) {
@@ -138,7 +130,20 @@ export const useAuthStore = create<AuthState, [['zustand/persist', AuthState]]>(
                     console.error("Failed to fetch user count:", err);
                     return 0;
                 }
+            },
+            testConnection: async () => {
+                try {
+                    const res = await axios.get("/auth/ping");
+                    console.log("✅ FE kết nối BE thành công:", res.data);
+                    toast.success("Kết nối BE OK");
+                    return res.data;
+                } catch (err: any) {
+                    console.error("❌ Lỗi kết nối BE:", err.message);
+                    toast.error("Không kết nối được BE");
+                    return null;
+                }
             }
+
         }),
         {
             name: "auth-store",

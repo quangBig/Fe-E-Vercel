@@ -47,7 +47,7 @@ export default function OrderPage() {
     return (
         <>
             <Header />
-            <div className="flex bg-[#fafafa] min-h-screen text-black mt-20">
+            <div className="flex bg-[#fafafa] min-h-screen text-black">
                 <OrderSidebar />
                 <div className="flex-1 p-8">
                     <OrderTabs current={tab} onChange={setTab} />

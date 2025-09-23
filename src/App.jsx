@@ -27,6 +27,11 @@ import ProductPages from "./features/products/ProductPages";
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const { pageProducts, getPageProducts } = usePageProductStore();;
+  const { testConnection } = useAuthStore();
+  useEffect(() => {
+    testConnection();
+  }, [testConnection]);
+  console.log(testConnection, "asd")
   useEffect(() => {
     getPageProducts();
   }, [getPageProducts]);

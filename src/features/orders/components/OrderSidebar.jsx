@@ -1,19 +1,29 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useAuthStore } from '../../../stores/useAuthStore';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const MENU = [
     { label: "Thông Báo", to: "#" },
     { label: "Tài Khoản Của Tôi", to: "/account" },
     { label: "Đơn Mua", to: "/orders" },
 ];
+
 export default function OrderSidebar() {
     const location = useLocation();
+    const { user } = useAuthStore();
+    console.log(user, "user"); // Debug
+
     return (
         <aside className="w-64 bg-white border-r min-h-screen p-6 mt-20">
             <div className="flex items-center gap-3 mb-8">
-                <img src="/avatar.png" className="w-14 h-14 rounded-full" alt="avatar" />
+                <AccountCircleIcon style={{ fontSize: 26 }} />
                 <div>
-                    <div className="font-bold">beewoo.shop</div>
-                    <div className="text-xs text-gray-500 cursor-pointer">Sửa Hồ Sơ</div>
+                    {/* In ra tên user từ store */}
+                    <div className="font-bold">{user?.role || "User"}</div>
+                    {/* In ra email hoặc cho sửa hồ sơ */}
+                    <div className="text-xs text-gray-500 cursor-pointer">
+                        {user?.email || "Sửa Hồ Sơ"}
+                    </div>
                 </div>
             </div>
             <nav>
@@ -35,5 +45,3 @@ export default function OrderSidebar() {
         </aside>
     );
 }
-
-
