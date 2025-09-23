@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
     const { cart, getCart, clearCart } = useCartStore();
-    const { createOrder } = useOrderStore();
+    const { createOrder, checkoutWithMomo } = useOrderStore();
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
@@ -168,13 +168,15 @@ const CheckoutPage = () => {
         };
 
         try {
-            // tạo đơn hàng
-            await createOrder(orderData);
-
-            // xóa giỏ hàng luôn sau khi đặt hàng thành công
-            await clearCart();
-
-            toast.success("Đặt hàng thành công!");
+            const order = await createOrder(orderData);
+            //MOMO
+            if (formData.paymentMethod === "momo") {
+                await checkoutWithMomo(order._id)
+            } else {
+                //COD
+                await clearCart();
+                toast.success("Đặt hàng thành công!");
+            }
         } catch (error) {
             console.error(error);
             toast.error("Đặt hàng thất bại!");

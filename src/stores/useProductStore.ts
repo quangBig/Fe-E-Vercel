@@ -15,7 +15,7 @@ export interface Product {
         _id?: string;
         name: string;
         price: string;
-        discountedPrice?: string; // 👈 thêm giá sau khi giảm
+        discountedPrice?: string; //  thêm giá sau khi giảm
         config?: string;
         colors?: {
             _id?: string;
@@ -24,7 +24,7 @@ export interface Product {
             hex?: string;
             image?: string;
             price?: string;
-            discountedPrice?: string; // 👈 thêm giá sau khi giảm
+            discountedPrice?: string; //  thêm giá sau khi giảm
         }[];
     }[];
     createdAt?: string;

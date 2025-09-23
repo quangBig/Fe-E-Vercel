@@ -68,6 +68,7 @@ interface OrderState {
     cancelOrder: (id: string) => Promise<void>;
     removeOrder: (id: string) => Promise<void>;
     getStatistics: () => Promise<void>;
+    checkoutWithMomo: (id: string) => Promise<void>
 }
 
 
@@ -83,12 +84,12 @@ export const useOrderStore = create<OrderState>((set, get) => ({
             const res = await axios.post("/orders", data);
             set({ orders: [...get().orders, res.data], loading: false });
             toast.success("Tạo đơn hàng thành công");
+            return res.data
         } catch (err: any) {
             set({ loading: false });
             toast.error("Tạo đơn hàng thất bại: " + (err.response?.data?.message || err.message));
         }
     },
-
 
     // ===== GET ALL ORDERS =====
     getOrders: async () => {
@@ -204,5 +205,20 @@ export const useOrderStore = create<OrderState>((set, get) => ({
             toast.error("Lấy thống kê đơn hàng thất bại: " + err.message);
         }
     },
+    // Checkout with Momo
+    checkoutWithMomo: async (id: string) => {
+        set({ loading: true });
+        try {
+            const res = await axios.post(`/orders/checkout/${id}`);
+            if (res.data && res.data.payUrl) {
+                window.location.href = res.data.payUrl;
+            } else {
+                toast.error("Không thấy cổng thanh toán")
+            }
+        } catch (err: any) {
+            set({ loading: false });
+            toast.error("Thanh toán MoMo thất bại: " + (err.response?.data?.message || err.message));
+        }
+    }
 
 }));

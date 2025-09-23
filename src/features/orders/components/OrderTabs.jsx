@@ -10,7 +10,7 @@ const TABS = [
 
 export default function OrderTabs({ current, onChange }) {
     return (
-        <div className="flex border-b bg-white">
+        <div className="flex border-b bg-white mt-20">
             {TABS.map(tab => (
                 <button
                     key={tab.value}
