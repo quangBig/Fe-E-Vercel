@@ -3,8 +3,7 @@ import axios from 'axios';
 import { useAuthStore } from '../stores/useAuthStore';
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:3000', // note bao giờ chạy deply đổi sang local của .env
-    // import.meta.env.VITE_API_URL ||
+    baseURL: import.meta.env.VITE_API_URL || 'http://localhost:3000', // note bao giờ chạy deply đổi sang local của .env
     withCredentials: true, // cần nếu dùng cookie/session
 });
 console.log("Axios baseURL:", import.meta.env.VITE_API_URL);
