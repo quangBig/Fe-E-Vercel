@@ -32,7 +32,7 @@ export interface Order {
     items: OrderItem[];
     shippingAddress: ShippingAddress;
     payment: {
-        method: "cod" | "momo";
+        method: "cod" | "vnpay";
         status: "pending" | "paid" | "failed";
     };
     note?: string;
@@ -68,7 +68,7 @@ interface OrderState {
     cancelOrder: (id: string) => Promise<void>;
     removeOrder: (id: string) => Promise<void>;
     getStatistics: () => Promise<void>;
-    checkoutWithMomo: (id: string) => Promise<void>
+    checkoutWithVnpay: (id: string) => Promise<void>;
 }
 
 
@@ -205,8 +205,8 @@ export const useOrderStore = create<OrderState>((set, get) => ({
             toast.error("Lấy thống kê đơn hàng thất bại: " + err.message);
         }
     },
-    // Checkout with Momo
-    checkoutWithMomo: async (id: string) => {
+    // Checkout with VNPay
+    checkoutWithVnpay: async (id: string) => {
         set({ loading: true });
         try {
             const res = await axios.post(`/orders/checkout/${id}`);
@@ -217,7 +217,7 @@ export const useOrderStore = create<OrderState>((set, get) => ({
             }
         } catch (err: any) {
             set({ loading: false });
-            toast.error("Thanh toán MoMo thất bại: " + (err.response?.data?.message || err.message));
+            toast.error("Thanh toán VNPay thất bại: " + (err.response?.data?.message || err.message));
         }
     }
 

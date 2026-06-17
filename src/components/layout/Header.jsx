@@ -122,12 +122,17 @@ const Header = ({ logoColor = "#000" }) => {
                             Home
                         </Link>
                     </li>
+                    <li>
+                        <Link to="/products" className="hover:text-black transition">
+                            Sản phẩm
+                        </Link>
+                    </li>
                     {[...pageProducts]
                         .sort((a, b) => a.name.localeCompare(b.name))
                         .map((item) => (
                             <li key={item.name}>
                                 <Link
-                                    to={item.slug}
+                                    to={item.slug.startsWith("/") ? item.slug : `/${item.slug}`}
                                     className="hover:text-black transition"
                                 >
                                     {item.name}

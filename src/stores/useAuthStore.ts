@@ -134,12 +134,12 @@ export const useAuthStore = create<AuthState, [['zustand/persist', AuthState]]>(
             testConnection: async () => {
                 try {
                     const res = await axios.get("/auth/ping");
-                    console.log("✅ FE kết nối BE thành công:", res.data);
-                    toast.success("Kết nối BE OK");
+                    // console.log("✅ FE kết nối BE thành công:", res.data);
+                    // toast.success("Kết nối BE OK");
                     return res.data;
                 } catch (err: any) {
-                    console.error("❌ Lỗi kết nối BE:", err.message);
-                    toast.error("Không kết nối được BE");
+                    // console.error("❌ Lỗi kết nối BE:", err.message);
+                    // toast.error("Không kết nối được BE");
                     return null;
                 }
             }

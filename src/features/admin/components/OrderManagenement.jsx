@@ -77,7 +77,7 @@ export default function OrderManagement() {
                                         </td>
                                         <td className="px-4 py-3">{order.total.toLocaleString()} ₫</td>
                                         <td className="px-4 py-3">
-                                            {order.payment.method === "cod" ? "COD" : "Momo"} -{" "}
+                                            {order.payment.method === "cod" ? "COD" : "VNPay"} -{" "}
                                             <span
                                                 className={`font-medium ${order.payment.status === "paid"
                                                     ? "text-green-600"

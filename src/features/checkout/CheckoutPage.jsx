@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const CheckoutPage = () => {
     const { cart, getCart, clearCart } = useCartStore();
-    const { createOrder, checkoutWithMomo } = useOrderStore();
+    const { createOrder, checkoutWithVnpay } = useOrderStore();
 
     const [provinces, setProvinces] = useState([]);
     const [districts, setDistricts] = useState([]);
@@ -169,9 +169,9 @@ const CheckoutPage = () => {
 
         try {
             const order = await createOrder(orderData);
-            //MOMO
-            if (formData.paymentMethod === "momo") {
-                await checkoutWithMomo(order._id)
+            // VNPay / COD
+            if (formData.paymentMethod === "vnpay") {
+                await checkoutWithVnpay(order._id);
             } else {
                 //COD
                 await clearCart();
@@ -308,8 +308,8 @@ const CheckoutPage = () => {
                                 <span className="ml-3">Thanh toán khi nhận hàng (COD)</span>
                             </label>
                             <label className="flex items-center p-4 border rounded-lg cursor-pointer mt-3">
-                                <input type="radio" name="paymentMethod" value="momo" checked={formData.paymentMethod === "momo"} onChange={handleInputChange} />
-                                <span className="ml-3">Ví MoMo</span>
+                                <input type="radio" name="paymentMethod" value="vnpay" checked={formData.paymentMethod === "vnpay"} onChange={handleInputChange} />
+                                <span className="ml-3">Cổng thanh toán VNPay</span>
                             </label>
                         </div>
 

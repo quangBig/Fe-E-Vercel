@@ -24,7 +24,7 @@ export default function ProductCarousel() {
                 {pageProducts.map((p) => (
                     <Link
                         key={p._id}
-                        to={p.slug || "#"}
+                        to={p.slug ? (p.slug.startsWith("/") ? p.slug : `/${p.slug}`) : "#"}
                         className="min-w-[160px] flex flex-col items-center hover:scale-105 transition-transform"
                     >
                         <img

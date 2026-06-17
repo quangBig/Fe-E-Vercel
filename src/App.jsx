@@ -15,6 +15,8 @@ import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/common/ScrollToTop";
 import ProductDetailPage from "./features/products/ProductDetailPage";
 import CheckoutPage from "./features/checkout/CheckoutPage";
+import OrderStatusPage from "./features/orders/OrderStatusPage";
+import ProductsPage from "./features/products/ProductsPage";
 import { useEffect } from "react";
 import { useAuthStore } from "./stores/useAuthStore";
 import { ToastContainer } from 'react-toastify';
@@ -51,6 +53,8 @@ function App() {
         <Route path="/product/:productId" element={<ProductDetailPage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order/status" element={<OrderStatusPage />} />
+        <Route path="/products" element={<ProductsPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/orders" element={<OrderPage />} />
